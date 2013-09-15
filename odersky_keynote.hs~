@@ -1,0 +1,19 @@
+data EntryKind =
+    CpeSource
+
+data Entry = Entry
+    { kind :: EntryKind,
+      path :: String }
+
+findMember path = [()]
+
+getRawClasspath :: () -> [Entry]
+getRawClasspath() = []
+
+res :: () -> [Entry]
+res() = concat
+          (\entry@Entry { path = path } -> findMember path)
+          $ filter (\entry@Entry { kind = kind } ->
+                       case kind of
+                         CpeSource -> True
+                         _ -> False) (getRawClasspath())
